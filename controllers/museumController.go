@@ -128,6 +128,18 @@ func UpdateMuseum(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Museum updated successfully"})
 }
 
+func GetAllMuseum(c *gin.Context) {
+    var museums []models.Museum
+
+    if err := database.DB.Find(&museums).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+
+    c.JSON(http.StatusOK, gin.H{"museums": museums})
+}
+
+
 func GetMuseumsByState(c *gin.Context) {
 	state := c.Query("state")
 
