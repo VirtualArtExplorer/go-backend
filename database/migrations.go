@@ -11,6 +11,7 @@ func RunMigrations() {
 	}
 	migrationFiles := []string{
 		"database/migrations/0001_create_managers_table.sql",
+		"database/migrations/0002_create_museum_table.sql",
 	}
 
 	for _, file := range migrationFiles {
