@@ -29,12 +29,19 @@ func main() {
 
 	r.POST("/api/v1/managers", controllers.CreateManager)
 	r.POST("/api/v1/login", controllers.Login)
+	r.GET("/api/v1/museums/", controllers.GetAllMuseum)
+	r.GET("api/v1/museums/city/:city", controllers.GetMuseumsByCity)
+	r.GET("api/v1/museums/state/:state", controllers.GetMuseumsByState)
+	r.GET("api/v1/museums/name/:name", controllers.GetMuseumsByName)
 
 	auth := r.Group("/api/v1")
 	auth.Use(utils.ValidateTokenMiddleware)
 
 	auth.PUT("/managers/:id", controllers.UpdateManager)
 	auth.PUT("/managers/:id/disable", controllers.DisableManager)
+	auth.POST("/museums/", controllers.CreateMuseum)
+	auth.PUT("/museums/:id", controllers.UpdateMuseum)
+	auth.PUT("/museums/:id/disable", controllers.DisableMuseum)
 
 	r.Run(":8080")
 }
